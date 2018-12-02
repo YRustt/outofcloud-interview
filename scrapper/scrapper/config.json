@@ -1,0 +1,20 @@
+{
+    "lenta": {
+        "news": {
+            "url": "https://lenta.ru/rss",
+            "path_to_items": ["rss", "channel"],
+            "item_tag": "item",
+            "item_fields": {
+                "id": ["guid"],
+                "title": ["title"],
+                "url": ["link"],
+                "description": ["description"],
+                "pub_date": ["pubDate"],
+                "category": ["category"]
+            }
+        },
+        "grub": {
+
+        }
+    }
+}
