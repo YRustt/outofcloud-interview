@@ -5,16 +5,33 @@
             "path_to_items": ["rss", "channel"],
             "item_tag": "item",
             "item_fields": {
-                "id": ["guid"],
                 "title": ["title"],
-                "url": ["link"],
-                "description": ["description"],
-                "pub_date": ["pubDate"],
-                "category": ["category"]
+                "link": ["link"],
+                "desc": ["description"],
+                "published": ["pubDate"]
             }
         },
         "grub": {
-
+            "item_fields": {
+                "title": {
+                    "name": "h1",
+                    "attrs": {
+                        "class": "b-topic__title"
+                    }
+                },
+                "image": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "b-topic__title-image"
+                    }
+                },
+                "content": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "b-text"
+                    }
+                }
+            }
         }
     }
 }

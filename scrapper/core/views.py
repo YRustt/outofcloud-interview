@@ -35,11 +35,17 @@ async def grub(request):
 
 
 async def grubs(request):
-    name = request.rel_url.query.get('name')
-    urls = request.rel_url.query.get('urls')
+    data = json.loads(await request.text())
+
+    name = data['name']
+    urls = data['urls']
 
     configs = (make_config(name=name, url=url, request_type='grub') for url in urls)
     items = await asyncio.gather(*[fetch_url(config) for config in configs])
     text = json.dumps(items, ensure_ascii=False)
 
     return web.json_response(text=text)
+
+
+async def register(request):
+    pass

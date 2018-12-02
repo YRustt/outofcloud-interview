@@ -2,6 +2,7 @@ import requests
 
 from typing import List, Dict
 from xml.etree import ElementTree
+from bs4 import BeautifulSoup
 
 from .settings import NEWS_TYPE, GRUB_TYPE
 from .config import Config
@@ -51,7 +52,13 @@ def parse_news(text: str, config: Config) -> List[Dict[str, str]]:
 
 
 def parse_grub(text: str, config: Config) -> Dict[str, str]:
-    return {}
+    html = BeautifulSoup(text)
+
+    # TODO: add method for getting field value
+    item = {
+        field: html.find(**options).text for field, options in config.item_fields.items()
+    }
+    return item
 
 
 async def fetch_url(config: Config):

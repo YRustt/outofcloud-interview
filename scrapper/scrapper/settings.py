@@ -26,5 +26,9 @@ class GlobalConfig:
         with open(CONFIG_FILENAME, 'w') as f:
             json.dumps(self.config)
 
+    def register(self, name, config):
+        self.config[name] = config
+        self.save()
+
     def __getitem__(self, item):
         return self.config[item]
