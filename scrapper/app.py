@@ -1,7 +1,10 @@
 from aiohttp import web
 
-from routes import setup_routes
+from core.routes import setup_routes
+from scrapper.settings import GlobalConfig
 
+
+GlobalConfig().init()
 
 application = web.Application()
 setup_routes(application)
