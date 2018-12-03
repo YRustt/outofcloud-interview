@@ -1,6 +1,8 @@
 import os
 import json
 
+from .exceptions import NotInitializedGlobalConfig
+
 
 NEWS_TYPE = 'news'
 GRUB_TYPE = 'grub'
@@ -23,12 +25,27 @@ class GlobalConfig:
             self.config = json.load(f)
 
     def save(self):
+        if not hasattr(self, 'config'):
+            raise NotInitializedGlobalConfig()
+
         with open(CONFIG_FILENAME, 'w') as f:
             json.dumps(self.config)
 
     def register(self, name, config):
+        if not hasattr(self, 'config'):
+            raise NotInitializedGlobalConfig()
+
         self.config[name] = config
         self.save()
 
+    def __iter__(self, name):
+        if not hasattr(self, 'config'):
+            raise NotInitializedGlobalConfig()
+
+        return iter(self.config)
+
     def __getitem__(self, item):
+        if not hasattr(self, 'config'):
+            raise NotInitializedGlobalConfig()
+
         return self.config[item]
