@@ -2,14 +2,27 @@
     "lenta": {
         "news": {
             "url": "https://lenta.ru/rss",
-            "path_to_items": ["rss", "channel"],
+            "path_to_items": [
+                "rss",
+                "channel"
+            ],
             "item_tag": "item",
             "item_fields": {
-                "title": ["title"],
-                "link": ["link"],
-                "desc": ["description"],
-                "published": ["pubDate"],
-                "category": ["category"]
+                "title": [
+                    "title"
+                ],
+                "link": [
+                    "link"
+                ],
+                "desc": [
+                    "description"
+                ],
+                "published": [
+                    "pubDate"
+                ],
+                "category": [
+                    "category"
+                ]
             }
         },
         "grub": {
@@ -31,6 +44,94 @@
                     "name": "div",
                     "attrs": {
                         "class": "b-text"
+                    },
+                    "tag": "p"
+                }
+            }
+        }
+    },
+    "interfax": {
+        "news": {
+            "url": "https://www.interfax.ru/rss.asp",
+            "path_to_items": [
+                "rss",
+                "channel"
+            ],
+            "item_tag": "item",
+            "item_fields": {
+                "title": [
+                    "title"
+                ],
+                "link": [
+                    "link"
+                ],
+                "desc": [
+                    "description"
+                ],
+                "published": [
+                    "pubDate"
+                ],
+                "category": [
+                    "category"
+                ]
+            }
+        },
+        "grub": {
+            "item_fields": {
+                "title": {
+                    "name": "h1",
+                    "attrs": {
+                        "class": "textMTitle"
+                    }
+                },
+                "content": {
+                    "name": "article",
+                    "attrs": {
+                        "itemprop": "articleBody"
+                    },
+                    "tag": "p"
+                }
+            }
+        }
+    },
+    "kommersant": {
+        "news": {
+            "url": "http://www.kommersant.ru/RSS/news.xml",
+            "path_to_items": [
+                "rss",
+                "channel"
+            ],
+            "item_tag": "item",
+            "item_fields": {
+                "title": [
+                    "title"
+                ],
+                "link": [
+                    "link"
+                ],
+                "desc": [
+                    "description"
+                ],
+                "published": [
+                    "pubDate"
+                ],
+                "category": [
+                    "category"
+                ]
+            }
+        },
+        "grub": {
+            "item_fields": {
+                "title": {
+                    "name": "h1",
+                    "attrs": {
+                        "class": "article_name"
+                    }
+                },
+                "content": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "article_text_wrapper"
                     },
                     "tag": "p"
                 }

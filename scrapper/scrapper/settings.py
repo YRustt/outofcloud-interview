@@ -29,7 +29,7 @@ class GlobalConfig:
             raise NotInitializedGlobalConfig()
 
         with open(CONFIG_FILENAME, 'w') as f:
-            json.dumps(self.config)
+            f.write(json.dumps(self.config, indent=4))
 
     def register(self, name, config):
         if not hasattr(self, 'config'):

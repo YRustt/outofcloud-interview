@@ -93,6 +93,8 @@ async def fetch_url(config: Config):
     response = requests.get(config.url)
 
     if response.status_code == 200:
+        response.encoding = response.apparent_encoding
+
         text = response.text
 
         if config.request_type == NEWS_TYPE:
