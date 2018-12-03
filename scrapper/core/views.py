@@ -1,16 +1,25 @@
 import json
-import logging
 import asyncio
 from aiohttp import web
 
 from scrapper.utils import fetch_url
 from scrapper.config import make_config
-
-
-logger = logging.getLogger(__name__)
+from scrapper.settings import GlobalConfig
 
 
 async def news(request):
+    """Handler for getting list of news.
+
+    :param request:
+
+    e.g.: GET /news?name={name:str}&limit={limit:Optional[int]}
+    where
+        name - registered service's name
+        limit - news count
+
+    :return: json representations for list of news (see scrapper/utils.py)
+    """
+
     name = request.rel_url.query.get('name')
     limit = request.rel_url.query.get('limit')
     if limit is not None:
@@ -24,6 +33,18 @@ async def news(request):
 
 
 async def grub(request):
+    """Handler for getting detail information for one news
+
+    :param request:
+
+    e.g.: GET /grub?name={name:str}&url={url:str}
+    where
+        name - registered service's name
+        url - url to news from news endpoint's response
+
+    :return: json representation for one news (see scrapper/utils.py)
+    """
+
     name = request.rel_url.query.get('name')
     url = request.rel_url.query.get('url')
 
@@ -35,6 +56,19 @@ async def grub(request):
 
 
 async def grubs(request):
+    """Handler for getting detail information for many news
+
+    :param request:
+
+    e.g.: POST /grub
+    with json {"name": "{name}", "urls": ["{url}", ...]}
+    where
+        name - registered service's name
+        urls - list of urls to news from news endpoint's response
+
+    :return: json representation for list of news details
+    """
+
     data = json.loads(await request.text())
 
     name = data['name']
@@ -48,4 +82,25 @@ async def grubs(request):
 
 
 async def register(request):
-    pass
+    """Handler for registering new service
+
+    :param request:
+
+    e.g.: POST /register
+    with json {"name": "{name}", "config": {...}}
+    where
+        name - registered service's name
+        config - dict with information about service (see scrapper/config.py)
+
+    :return:
+    """
+
+    data = json.loads(await request.text())
+
+    name = data['name']
+    config = data['config']
+
+    global_config = GlobalConfig()
+    global_config.register(name=name, config=config)
+
+    return web.Response(reason='registered')

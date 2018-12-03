@@ -1,11 +1,12 @@
 import requests
 
-from typing import List, Dict
+from typing import Optional, List, Dict
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup
 
 from .settings import NEWS_TYPE, GRUB_TYPE
 from .config import Config
+from .exceptions import NotValidTagsPath
 
 
 def _get_field(xml: ElementTree, field: str, config: Config) -> str:
@@ -17,7 +18,7 @@ def _get_field(xml: ElementTree, field: str, config: Config) -> str:
                 root = child
                 break
         else:
-            raise ValueError("Not valid tags path to field %s: %s" % (field, str(config.item_fields[field])))
+            raise NotValidTagsPath("Not valid tags path to field %s: %s" % (field, str(config.item_fields[field])))
 
     return root.text
 
@@ -31,7 +32,7 @@ def _get_items(xml: ElementTree, config: Config) -> List[Dict[str, str]]:
                 root = child
                 break
         else:
-            raise ValueError("Not valid tags path to items: %s" % str(config.path_to_items))
+            raise NotValidTagsPath("Not valid tags path to items: %s" % str(config.path_to_items))
 
     result = []
     for child in root:
@@ -61,7 +62,13 @@ def parse_grub(text: str, config: Config) -> Dict[str, str]:
     return item
 
 
-async def fetch_url(config: Config):
+async def fetch_url(config: Config) -> Optional[List[Dict[str, str]], Dict[str, str]]:
+    """Function for getting list of detail information about news.
+
+    :param config: instance of Config class
+    :return: list of dicts or dict with information about news.
+    """
+
     response = requests.get(config.url)
 
     if response.status_code == 200:

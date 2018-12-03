@@ -13,3 +13,8 @@ class NotInitializedGlobalConfig(Exception):
 class NotValidRequestType(ValueError):
     def __init__(self):
         super().__init__("Not valid request type")
+
+
+class NotValidTagsPath(ValueError):
+    def __init__(self, message):
+        super().__init__(message)
