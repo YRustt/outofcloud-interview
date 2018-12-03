@@ -2,13 +2,13 @@ version: "2"
 services:
   web:
     container_name: web
-    build: ./backend/
+    build: ./frontend/
     restart: on-failure
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: npm run start
     volumes:
-      - ./backend:/backend
+      - ./frontend:/frontend
     ports:
-      - "8000:8000"
+      - "3000:3000"
   scrapper:
     container_name: scrapper
     build: ./scrapper/

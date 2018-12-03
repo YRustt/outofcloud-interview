@@ -47,7 +47,7 @@ def make_config(**kwargs):
     request_type = kwargs.get('request_type')
 
     if request_type == NEWS_TYPE:
-        url = global_config[name][request_type]['url']
+        url = kwargs.get('url') or global_config[name][request_type]['url']
         limit = kwargs.get('limit')
 
         path_to_items = kwargs.get('path_to_items') or global_config[name][request_type]['path_to_items']

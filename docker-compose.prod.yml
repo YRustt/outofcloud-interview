@@ -1,0 +1,14 @@
+version: "2"
+services:
+  web:
+    build: ./backend/
+    restart: always
+    command: gunicorn --bind 0.0.0.0:8080 core.wsgi
+  scrapper:
+    build: ./scrapper/
+    restart: always
+  nginx:
+    build: ./nginx/
+    restart: always
+    ports:
+      - "80:80"
