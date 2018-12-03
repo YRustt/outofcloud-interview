@@ -38,7 +38,7 @@ class GlobalConfig:
         self.config[name] = config
         self.save()
 
-    def __iter__(self, name):
+    def __iter__(self):
         if not hasattr(self, 'config'):
             raise NotInitializedGlobalConfig()
 
