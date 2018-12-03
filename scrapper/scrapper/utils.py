@@ -1,6 +1,6 @@
 import requests
 
-from typing import Optional, List, Dict
+from typing import List, Dict
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup
 
@@ -9,7 +9,7 @@ from .config import Config
 from .exceptions import NotValidTagsPath
 
 
-def _get_field(xml: ElementTree, field: str, config: Config) -> str:
+def _get_field_for_news(xml: ElementTree, field: str, config: Config) -> str:
     root = xml
 
     for tag in config.item_fields[field]:
@@ -23,7 +23,7 @@ def _get_field(xml: ElementTree, field: str, config: Config) -> str:
     return root.text
 
 
-def _get_items(xml: ElementTree, config: Config) -> List[Dict[str, str]]:
+def _get_items_for_news(xml: ElementTree, config: Config) -> List[Dict[str, str]]:
     root = [xml]
 
     for tag in config.path_to_items:
@@ -37,7 +37,7 @@ def _get_items(xml: ElementTree, config: Config) -> List[Dict[str, str]]:
     result = []
     for child in root:
         if child.tag == config.item_tag:
-            item = {field: _get_field(child, field, config) for field in config.item_fields}
+            item = {field: _get_field_for_news(child, field, config) for field in config.item_fields}
             result.append(item)
 
             if config.limit is not None and len(result) == config.limit:
@@ -48,21 +48,42 @@ def _get_items(xml: ElementTree, config: Config) -> List[Dict[str, str]]:
 
 def parse_news(text: str, config: Config) -> List[Dict[str, str]]:
     xml = ElementTree.fromstring(text)
-    items = _get_items(xml, config)
+    items = _get_items_for_news(xml, config)
     return items
+
+
+def _get_grub_child_repr(child, tag: str) -> str:
+    if tag == "img":
+        return child.attrs["src"]
+    elif tag == "a":
+        return child.attrs["href"]
+    else:
+        return child.text
+
+
+def _get_grub_field(html: BeautifulSoup, field: str, config: Config) -> str:
+    options = config.item_fields[field]
+
+    tag = options.get("tag", None)
+    item = html.find(name=options["name"], attrs=options["attrs"])
+    if tag is not None:
+        result = [_get_grub_child_repr(child, tag) for child in item.find_all(tag)]
+    else:
+        result = item.text
+
+    return result
 
 
 def parse_grub(text: str, config: Config) -> Dict[str, str]:
     html = BeautifulSoup(text)
 
-    # TODO: add method for getting field value
     item = {
-        field: html.find(**options).text for field, options in config.item_fields.items()
+        field: _get_grub_field(html, field, config) for field in config.item_fields.keys()
     }
     return item
 
 
-async def fetch_url(config: Config) -> Optional[List[Dict[str, str]], Dict[str, str]]:
+async def fetch_url(config: Config):
     """Function for getting list of detail information about news.
 
     :param config: instance of Config class

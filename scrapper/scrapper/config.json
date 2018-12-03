@@ -8,7 +8,8 @@
                 "title": ["title"],
                 "link": ["link"],
                 "desc": ["description"],
-                "published": ["pubDate"]
+                "published": ["pubDate"],
+                "category": ["category"]
             }
         },
         "grub": {
@@ -23,13 +24,15 @@
                     "name": "div",
                     "attrs": {
                         "class": "b-topic__title-image"
-                    }
+                    },
+                    "tag": "img"
                 },
                 "content": {
                     "name": "div",
                     "attrs": {
                         "class": "b-text"
-                    }
+                    },
+                    "tag": "p"
                 }
             }
         }
