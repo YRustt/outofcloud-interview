@@ -29,7 +29,7 @@ global_config.init()
 
 ##### Запрос для получения списка новостей:
 
-```
+```python
 news_config = make_config(
     name="lenta",  # название сервиса
     request_type="news",  # тип запроса
@@ -68,7 +68,7 @@ await fetch_url(news_config)
 
 ##### Запрос на получение детального описания для новости:
 
-```
+```python
 grub_config = make_config(
     name="lenta",  # название сервиса
     request_type="grub",  # тип запроса
@@ -156,4 +156,129 @@ await fetch_url(grub_config)
 }
 ```
 
+##### Регистрация нового сервиса
+
+```python
+global_config.register(
+    name="interfax",
+    config={
+        "news": {
+            "url": "https://www.interfax.ru/rss.asp",
+            "path_to_items": ["rss", "channel"],
+            "item_tag": "item",
+            "item_fields": {
+                "title": ["title"],
+                "link": ["link"],
+                "desc": ["description"],
+                "published": ["pubDate"],
+                "category": ["category"]
+            }
+        },
+        "grub": {
+            "item_fields": {
+                "title": {
+                    "name": "h1",
+                    "attrs": {
+                        "class": "textMTitle"
+                    }
+                },
+                "content": {
+                    "name": "article",
+                    "attrs": {
+                        "itemprop": "articleBody"
+                    },
+                    "tag": "p"
+                }
+            }
+        }
+    }
+)
+```
+
 #### Rest API
+
+ <table style="width:100% !important;">
+    <thead>
+        <tr>
+            <th>endpoint</th>
+            <th>type</th>
+            <th>args</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>/news</td>
+        <td>GET</td>
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>name</td>
+                        <td>название сервиса</td>
+                    </tr>
+                    <tr>
+                        <td>limit</td>
+                        <td>ограничение на количество новостей</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>/grub</td>
+        <td>GET</td>
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>name</td>
+                        <td>название сервиса</td>
+                    </tr>
+                    <tr>
+                        <td>url</td>
+                        <td>ссылка на статью из сервиса</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>/grubs</td>
+        <td>POST</td>
+        <td>
+            Необходимо отправить json.
+            <table>
+                <tbody>
+                    <tr>
+                        <td>name</td>
+                        <td>название сервиса</td>
+                    </tr>
+                    <tr>
+                        <td>urls</td>
+                        <td>список ссылок на новости из сервиса</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>/register</td>
+        <td>POST</td>
+        <td>
+            Необходимо отправить json.
+            <table>
+                <tbody>
+                    <tr>
+                        <td>name</td>
+                        <td>название нового сервиса</td>
+                    </tr>
+                    <tr>
+                        <td>config</td>
+                        <td>конфигурация нового сервиса (см. config.json)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+ </table>
