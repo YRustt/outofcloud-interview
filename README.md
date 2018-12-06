@@ -207,7 +207,7 @@ global_config.register(
     </thead>
     <tbody>
     <tr>
-        <td>/news</td>
+        <td>/api/news</td>
         <td>GET</td>
         <td>
             <table>
@@ -225,7 +225,7 @@ global_config.register(
         </td>
     </tr>
     <tr>
-        <td>/grub</td>
+        <td>/api/grub</td>
         <td>GET</td>
         <td>
             <table>
@@ -243,7 +243,7 @@ global_config.register(
         </td>
     </tr>
     <tr>
-        <td>/grubs</td>
+        <td>/api/grubs</td>
         <td>POST</td>
         <td>
             Необходимо отправить json.
@@ -262,7 +262,7 @@ global_config.register(
         </td>
     </tr>
     <tr>
-        <td>/register</td>
+        <td>/api/register</td>
         <td>POST</td>
         <td>
             Необходимо отправить json.
@@ -282,3 +282,8 @@ global_config.register(
     </tr>
     </tbody>
  </table>
+ 
+ ### Фронтенд
+ 
+ Для запуска выполните команду: `docker-compose -f docker-compose.prod.yml up -d`.
+ 
