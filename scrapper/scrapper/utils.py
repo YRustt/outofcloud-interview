@@ -66,6 +66,9 @@ def _get_grub_field(html: BeautifulSoup, field: str, config: Config) -> str:
 
     tag = options.get("tag", None)
     item = html.find(name=options["name"], attrs=options["attrs"])
+    if item is None:
+        return
+
     if tag is not None:
         result = [_get_grub_child_repr(child, tag) for child in item.find_all(tag)]
     else:
@@ -77,9 +80,11 @@ def _get_grub_field(html: BeautifulSoup, field: str, config: Config) -> str:
 def parse_grub(text: str, config: Config) -> Dict[str, str]:
     html = BeautifulSoup(text)
 
-    item = {
-        field: _get_grub_field(html, field, config) for field in config.item_fields.keys()
-    }
+    item = {}
+    for field in config.item_fields.keys():
+        value = _get_grub_field(html, field, config)
+        if value is not None:
+            item[field] = value
     return item
 
 

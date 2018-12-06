@@ -137,5 +137,102 @@
                 }
             }
         }
+    },
+    "theguardian": {
+        "news": {
+            "url": "https://www.theguardian.com/uk/rss",
+            "path_to_items": [
+                "rss",
+                "channel"
+            ],
+            "item_tag": "item",
+            "item_fields": {
+                "title": [
+                    "title"
+                ],
+                "link": [
+                    "link"
+                ],
+                "desc": [
+                    "description"
+                ],
+                "published": [
+                    "pubDate"
+                ],
+                "category": [
+                    "category"
+                ]
+            }
+        },
+        "grub": {
+            "item_fields": {
+                "title": {
+                    "name": "h1",
+                    "attrs": {
+                        "class": "content__headline "
+                    }
+                },
+                "image": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "u-responsive-ratio"
+                    },
+                    "tag": "img"
+                },
+                "content": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "content__article-body from-content-api js-article__body"
+                    },
+                    "tag": "p"
+                }
+            }
+        }
+    },
+    "chinanews": {
+        "news": {
+            "url": "http://www.chinanews.com/rss/importnews.xml",
+            "path_to_items": [
+                "rss",
+                "channel"
+            ],
+            "item_tag": "item",
+            "item_fields": {
+                "title": [
+                    "title"
+                ],
+                "link": [
+                    "link"
+                ],
+                "desc": [
+                    "description"
+                ],
+                "published": [
+                    "pubDate"
+                ]
+            }
+        },
+        "grub": {
+            "item_fields": {
+                "title": {
+                    "name": "h1",
+                    "attrs": {}
+                },
+                "image": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "left_zw"
+                    },
+                    "tag": "img"
+                },
+                "content": {
+                    "name": "div",
+                    "attrs": {
+                        "class": "left_zw"
+                    },
+                    "tag": "p"
+                }
+            }
+        }
     }
 }
