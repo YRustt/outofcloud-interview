@@ -1,14 +1,25 @@
 version: "2"
 services:
   web:
-    build: ./backend/
-    restart: always
-    command: gunicorn --bind 0.0.0.0:8080 core.wsgi
+    container_name: web
+    build: ./frontend/
+    restart: on-failure
+    command: npm run start
+    volumes:
+      - ./frontend:/frontend
   scrapper:
+    container_name: scrapper
     build: ./scrapper/
-    restart: always
+    restart: on-failure
+    command: gunicorn app:application --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker --reload
+    volumes:
+      - ./scrapper:/scrapper
   nginx:
+    container_name: nginx
     build: ./nginx/
-    restart: always
+    restart: on-failure
     ports:
       - "80:80"
+    depends_on:
+      - web
+      - scrapper

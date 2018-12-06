@@ -7,8 +7,6 @@ services:
     command: npm run start
     volumes:
       - ./frontend:/frontend
-    ports:
-      - "3000:3000"
   scrapper:
     container_name: scrapper
     build: ./scrapper/
@@ -16,5 +14,12 @@ services:
     command: gunicorn app:application --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker --reload
     volumes:
       - ./scrapper:/scrapper
+  nginx:
+    container_name: nginx
+    build: ./nginx/
+    restart: on-failure
     ports:
-      - "8080:8080"
+      - "80:80"
+    depends_on:
+      - web
+      - scrapper
