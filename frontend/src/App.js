@@ -5,6 +5,7 @@ import './App.css';
 import News from './components/News';
 import Detail from './components/Detail';
 import Registration from './components/Registration';
+import MainDetail from './components/MainDetail';
 
 
 class App extends Component {
@@ -44,7 +45,7 @@ class App extends Component {
         </header>
         <Switch>
           <Route path='/news' component={News}/>
-          <Route path='/detail' component={Detail}/>
+          <Route path='/detail' component={MainDetail}/>
           <Route path='/register' component={Registration}/>
         </Switch>
       </div>

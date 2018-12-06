@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import buildUrl from 'build-url';
 import './Detail.css';
 
@@ -18,9 +19,16 @@ class Detail extends Component {
             queryParams: { name: name, url: url }
         });
 
+        const detail_url = buildUrl({
+            path: "/detail",
+            queryParams: { name: name, url: url}
+        })
+
         fetch(new_url)
             .then(response => response.json())
             .then(data => this.setState(data));
+
+        this.setState({ detail_url: detail_url});
     }
 
     render() {
@@ -34,7 +42,7 @@ class Detail extends Component {
 
         return (
             <div className={ this.props.div_class }>
-                <a className="pos-relative h-100 dplay-block" href="#">
+                <a className="pos-relative h-100 dplay-block" href={ this.state.detail_url } >
                     <div className="img-bg bg-grad-layer-6"><img src={ image }></img></div>
                     <div className="abs-blr color-white p-20 bg-sm-color-7">
                         <h4 className="mb-10 mb-sm-5"><b>{ title }</b></h4>
