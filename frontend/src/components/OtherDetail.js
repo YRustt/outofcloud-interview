@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import buildUrl from 'build-url';
 import './OtherDetail.css';
 
+import Loader from './Loader';
+
 
 class Detail extends Component {
     constructor(props) {
@@ -25,7 +27,7 @@ class Detail extends Component {
 
     render() {
         if (this.state.title === undefined) {
-            return (<div>Статья загружается</div>);
+            return (<div className="col-sm-6 h-400x"><Loader/></div>);
         }
         const image = (this.state.image !== undefined ? this.state.image[0] : "https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2321248/580/386/m1/fpnw/wm1/cover-.jpg?1487898325&s=6c1df3e0f086a52e0dc4e0a39073a714");
         const title = this.props.curr_news.title;

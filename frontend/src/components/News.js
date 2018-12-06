@@ -3,6 +3,7 @@ import './News.css';
 
 import Detail from './Detail';
 import OtherDetail from './OtherDetail';
+import Loader from './Loader';
 
 
 class News extends Component {
@@ -30,7 +31,7 @@ class News extends Component {
     render() {
         if (this.state.name !== undefined) {
             if (this.state.news.length === 0) {
-                return (<div>Данные загружаются</div>);
+                return (<div className="container"><Loader/></div>);
             }
             return (
                 <div>
