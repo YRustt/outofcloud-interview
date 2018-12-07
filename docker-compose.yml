@@ -11,7 +11,7 @@ services:
     container_name: scrapper
     build: ./scrapper/
     restart: on-failure
-    command: gunicorn app:application --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker --reload
+    command: gunicorn app:application --bind 0.0.0.0:8080 --worker-class aiohttp.worker.GunicornWebWorker --workers=9 --reload
     volumes:
       - ./scrapper:/scrapper
   nginx:
