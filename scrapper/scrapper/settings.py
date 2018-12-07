@@ -49,3 +49,6 @@ class GlobalConfig:
             raise NotInitializedGlobalConfig()
 
         return self.config[item]
+
+    def keys(self):
+        return self.config.keys()

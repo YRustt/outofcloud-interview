@@ -6,3 +6,4 @@ def setup_routes(application):
     application.router.add_get('/api/grub', grub)
     application.router.add_post('/api/grubs', grubs)
     application.router.add_post('/api/register', register)
+    application.router.add_get('/api/register', register)

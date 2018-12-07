@@ -95,12 +95,19 @@ async def register(request):
     :return:
     """
 
-    data = json.loads(await request.text())
-
-    name = data['name']
-    config = data['config']
-
     global_config = GlobalConfig()
-    global_config.register(name=name, config=config)
 
-    return web.Response(reason='registered')
+    if request.method == 'POST':
+        data = json.loads(await request.text())
+
+        name = data['name']
+        config = data['config']
+
+        global_config.register(name=name, config=config)
+
+        return web.Response(reason='registered')
+    elif request.method == 'GET':
+        keys = list(global_config.keys())
+        text = json.dumps(keys, ensure_ascii=False)
+
+        return web.json_response(text)
