@@ -6,6 +6,7 @@ import News from './components/News';
 import Detail from './components/Detail';
 import Registration from './components/Registration';
 import MainDetail from './components/MainDetail';
+import RegisteredServicesMenu from './components/RegisteredServicesMenu';
 
 
 class App extends Component {
@@ -37,7 +38,9 @@ class App extends Component {
                         <a className="menu-nav-icon" data-menu="#main-menu" href="#"><i className="ion-navicon"></i></a>
 
                         <ul className="main-menu" id="main-menu">
-                                <li className="drop-down"><a href="03_single-post.html">СЕРВИСЫ<i className="ion-arrow-down-b"></i></a></li>
+                                <li className="drop-down"><a href="#">СЕРВИСЫ<i className="ion-arrow-down-b"></i></a>
+                                    <RegisteredServicesMenu/>
+                                </li>
                                 <li><Link to="/register">ДОБАВИТЬ СЕРВИС</Link></li>
                         </ul>
                         <div className="clearfix"></div>

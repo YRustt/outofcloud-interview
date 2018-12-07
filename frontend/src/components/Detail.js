@@ -46,7 +46,7 @@ class Detail extends Component {
             <div className={ this.props.div_class }>
                 <a className="pos-relative h-100 dplay-block" href={ this.state.detail_url } >
                     <div className="img-bg bg-grad-layer-6"><img src={ image }></img></div>
-                    <div className="abs-blr color-white p-20 bg-sm-color-7">
+                    <div className="abs-blr color-white bg-black-50 p-20 bg-sm-color-7">
                         <h4 className="mb-10 mb-sm-5"><b>{ title }</b></h4>
                         <ul className="list-li-mr-20">
                             <li><i className="color-primary mr-5 font-12 ion-ios-pricetag"></i><span className="color-primary"><b>{ category }</b></span></li>

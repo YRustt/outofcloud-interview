@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import './MainDetail';
+import './MainDetail.css';
+
+import Loader from './Loader';
 
 
 class MainDetail extends Component {
@@ -16,7 +18,7 @@ class MainDetail extends Component {
         this.setState({
             name: args.name,
             url: args.url
-        })
+        });
 
         var url = "/api/grub" + this.props.location.search;
         fetch(url)
@@ -26,7 +28,7 @@ class MainDetail extends Component {
 
     render() {
         if (this.state.title === undefined) {
-            return (<div>Данные загружаются</div>);
+            return (<div><Loader/></div>);
         }
 
         console.log(this.state);

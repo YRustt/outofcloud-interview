@@ -358,12 +358,12 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 .color-lite-black{ color: #888; }
 
 
-
 /* BACKGROUND COLOR*/
 
 .bg-191{ background: #191919; }
 .bg-primary{ background: #F9B500!important; }
 
+.bg-black-50 { background: rgba(0, 0, 0, 0.5); }
 
 /* BACKGROUND IMAGE */
 
