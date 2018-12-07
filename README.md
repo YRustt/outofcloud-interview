@@ -1,4 +1,4 @@
-# outofcloud-interview
+# Скраппер новостей
 
 Тестовое задание для Out of Cloud.
 
