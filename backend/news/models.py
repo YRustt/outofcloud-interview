@@ -8,16 +8,22 @@ class News(models.Model):
     link = models.URLField(
         max_length=256
     )
-    image = models.ImageField(
+    image_url = models.URLField(
+        max_length=256,
         blank=True,
         null=True
     )
-    description = models.TextField()
+    description = models.CharField(
+        max_length=512,
+        blank=True
+    )
     content = models.TextField()
     published = models.DateTimeField()
     categories = models.ForeignKey(
         to='Category',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
     site = models.OneToOneField(
         to='NewsSite',
