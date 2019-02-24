@@ -1,0 +1,57 @@
+version: 2
+jobs:
+  backend:
+    docker:
+      - image: circleci/python:3.7
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - backend-requirements-{{ checksum "backend/requirements.txt" }}
+            - backend-requirements-
+      - run:
+          name: install requirements
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r "backend/requirements.txt"
+      - save_cache:
+          paths:
+            - ./venv
+          key: backend-requirements-{{ checksum "backend/requirements.txt" }}
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            cd backend
+            python3 manage.py test
+  scrapper:
+    docker:
+      - image: circleci/python:3.7
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - scrapper-requirements-{{ checksum "scrapper/requirements.txt" }}
+            - scrapper-requirements-
+      - run:
+          name: install requirements
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r "scrapper/requirements.txt"
+      - save_cache:
+          paths:
+            - ./venv
+          key: scrapper-requirements-{{ checksum "scrapper/requirements.txt" }}
+      - run:
+          name: run tests
+          command: echo "Run tests for scrapper app"
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - backend
+      - scrapper
