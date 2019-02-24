@@ -21,6 +21,12 @@ jobs:
             - ./venv
           key: backend-requirements-{{ checksum "backend/requirements.txt" }}
       - run:
+          name: make migrations
+          command: |
+            . venv/bin/activate
+            cd backend
+            python3 manage.py migrate
+      - run:
           name: run tests
           command: |
             . venv/bin/activate
