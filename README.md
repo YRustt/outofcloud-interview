@@ -282,8 +282,3 @@ global_config.register(
     </tr>
     </tbody>
  </table>
- 
- ### Фронтенд
- 
- Для запуска выполните команду: `docker-compose -f docker-compose.prod.yml up -d`.
- 
