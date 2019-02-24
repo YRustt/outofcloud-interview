@@ -12,13 +12,13 @@ class NewsSiteAdmin(admin.ModelAdmin):
 
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ("title", "link", "published", "site")
-    ordering = ("title", "site")
-    search_fields = ("title", "site")
+    list_display = ("site", "title", "link", "published")
+    ordering = ("site", "title")
+    search_fields = ("title", "site__name")
 
 
 @admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "site")
-    ordering = ("name", "site")
-    search_fields = ("name", "site")
+    list_display = ("site", "name")
+    ordering = ("site", "name")
+    search_fields = ("name", "site__name")
