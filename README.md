@@ -1,4 +1,4 @@
-# Скраппер новостей
+# L-News-Website
 
 Тестовое задание для Out of Cloud.
 
@@ -19,8 +19,8 @@ from scrapper.config import make_config
 from scrapper.utils import fetch_url
 
 """
-В GlobalConfig хранится информация обо всех 
-зарегестрированных сервисах новостей. 
+В GlobalConfig хранится информация обо всех
+зарегестрированных сервисах новостей.
 (см. scrapper/config.json)
 """
 global_config = GlobalConfig()
@@ -51,7 +51,7 @@ news_config = make_config(
 
 await fetch_url(news_config)
 ```
-Результатом является список словарей с информацией о новостях 
+Результатом является список словарей с информацией о новостях
 (заголовок, ссылка, описание и дата публикации):
 ```python
 [{'title': '«Желтые жилеты» разгромили Триумфальную арку в Париже'},
@@ -109,14 +109,14 @@ await fetch_url(grub_config)
     "lenta": {
         "news": {
             /* ссылка на rss */
-            "url": "https://lenta.ru/rss", 
+            "url": "https://lenta.ru/rss",
             /* путь из xml тэгов к записям о новостях */
-            "path_to_items": ["rss", "channel"], 
+            "path_to_items": ["rss", "channel"],
             /* xml тэг для новости */
             "item_tag": "item",
-            /* словарь, где ключами являются названия полей, 
-             а значениями путь из xml тэгов для получения их значений*/ 
-            "item_fields": { 
+            /* словарь, где ключами являются названия полей,
+             а значениями путь из xml тэгов для получения их значений*/
+            "item_fields": {
                 "title": ["title"],
                 "link": ["link"],
                 "desc": ["description"],
@@ -125,9 +125,9 @@ await fetch_url(grub_config)
             }
         },
         "grub": {
-            /* словарь, где ключами являются названия полей, 
+            /* словарь, где ключами являются названия полей,
              а значениями описания получения их значений,
-             состоящих из названия (name), атрибутов (attrs) и 
+             состоящих из названия (name), атрибутов (attrs) и
              извлекаемых тэгов (tag)*/
             "item_fields": {
                 "title": {
